@@ -8,14 +8,8 @@ export default function AboutPage() {
       <p>Interactive SVG tutorial using React, Redux and RxJS.</p>
       <h4>Source</h4>
       <code>
-        <a href="https://github.com/HunorMarton/SVGCurves">
-          https://github.com/HunorMarton/SVGCurves
-        </a>
-      </code>
-      <h4>This app is based on the following Drag & Drop template</h4>
-      <code>
-        <a href="https://github.com/HunorMarton/drag-and-drop">
-          https://github.com/HunorMarton/drag-and-drop
+        <a href="https://github.com/HunorMarton/svg-curves">
+          https://github.com/HunorMarton/svg-curves
         </a>
       </code>
       <h4>Made By</h4>
