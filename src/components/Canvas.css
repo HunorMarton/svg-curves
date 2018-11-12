@@ -1,0 +1,42 @@
+svg {
+    background-color: #440015;
+}
+
+.canvasCorners {
+    stroke: white;
+    stroke-width: 2px;
+    stroke-linecap: square;
+}
+
+.presentation {
+    stroke: white;
+    stroke-width: 20px;
+    stroke-linecap: round;
+    fill: none;
+}
+
+.presentationHelper {
+    stroke: dimgray;
+    stroke-width: 1px;
+    stroke-dasharray: 20, 20;
+    fill: none;
+}
+
+.presentationAlternative {
+    stroke: rgba(255,255,255, 0.2);
+    stroke-width: 1px;
+    stroke-dasharray: 1, 1;
+    fill: none;
+}
+
+.presentationAlternativeBackground {
+    stroke: rgba(96,0,30, 0.1);
+    stroke-width: 10px;
+    fill: none;
+}
+
+.presentationAlternativeBackground:hover {
+    stroke: rgba(255,255,255, 0.8);
+    stroke-width: 10px;
+    fill: none;
+}

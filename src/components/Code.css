@@ -1,0 +1,33 @@
+.code {
+    color: #121212;
+    box-sizing: border-box;
+    height: 150px;
+    padding: 8px 20px 10px 20px;
+    font-size: 1.3em;
+}
+
+.code pre {
+    /* TODO: Check what is in the bundle if no browser prefixes are presented here */
+    white-space: pre-wrap;       /* css-3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+    margin: 5px;
+}
+.code pre.level1 {
+    padding-left: 20px;
+}
+.code pre.level2 {
+    padding-left: 40px;
+}
+
+.code .tag {
+    color: #905;
+}
+.code .attribute {
+    color: #609;
+}
+.code .value {
+    color: #07a;
+}
