@@ -1,10 +1,13 @@
 {
-  "name": "svg",
+  "homepage": "https://hunormarton.github.io/svg-curves/",
+  "name": "svg-curves",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject"
   },
@@ -30,6 +33,7 @@
     "@types/react-dom": "^16.0.9",
     "@types/react-redux": "^6.0.9",
     "@types/react-router": "^4.4.0",
+    "gh-pages": "^2.0.1",
     "prettier": "^1.14.3",
     "tslint-config-airbnb": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",

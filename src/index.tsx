@@ -11,7 +11,9 @@ import { resize } from './state/ducks/canvas/actions';
 import { setArcStartPoint } from './state/ducks/arc/actions';
 import './index.css';
 
-const history = createBrowserHistory();
+const history = createBrowserHistory({
+  basename: '/svg-curves',
+});
 
 const composeEnhancer: typeof compose =
   (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
