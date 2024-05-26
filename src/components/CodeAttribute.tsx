@@ -1,10 +1,10 @@
-import * as React from 'react';
+import * as React from "react";
 
-interface IProps {
+interface CodeAttributeProps {
   children: React.ReactNode;
 }
 
-export const Attribute: React.SFC<IProps> = ({ children }) => (
+export const Attribute: React.FC<CodeAttributeProps> = ({ children }) => (
   <span>
     <span className="attribute">{children}</span>=
   </span>

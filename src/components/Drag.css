@@ -1,52 +1,52 @@
 .draggable {
-    fill: rgba(96,0,30, 0.2);
-    cursor: grab;
+  fill: rgba(96, 0, 30, 0.2);
+  cursor: grab;
 }
 
 .draggable text {
-    fill: rgba(255,0,80, 0.0);
+  fill: rgba(255, 0, 80, 0);
 }
 .draggable .arrowHead {
-    fill: #8c99a6;
+  fill: #8c99a6;
 }
 .draggable .arrowLine {
-    stroke: #8c99a6;
-    stroke-width: 2px;
+  stroke: #8c99a6;
+  stroke-width: 2px;
 }
 
 .draggable:hover {
-    fill: rgba(96,0,30, 0.8);
-    cursor: grab;
+  fill: rgba(96, 0, 30, 0.8);
+  cursor: grab;
 }
 
 .draggable:hover text {
-    fill: rgba(255,0,80, 0.8);
+  fill: rgba(255, 0, 80, 0.8);
 }
 .draggable:hover .arrowHead {
-    fill: white;
+  fill: white;
 }
 .draggable:hover .arrowLine {
-    stroke: white;
-    stroke-width: 2px;
+  stroke: white;
+  stroke-width: 2px;
 }
 
 .dragging {
-    fill: rgba(193,0,61, 0.8);
-    cursor: grabbing;
+  fill: rgba(193, 0, 61, 0.8);
+  cursor: grabbing;
 }
 
 .dragging text {
-    fill: rgba(255,255,255, 0.8);
+  fill: rgba(255, 255, 255, 0.8);
 }
 .dragging .arrowHead {
-    fill: white;
+  fill: white;
 }
 .dragging .arrowLine {
-    stroke: white;
-    stroke-width: 2px;
+  stroke: white;
+  stroke-width: 2px;
 }
 
 .draggable text,
 .dragging text {
-    user-select: none;
+  user-select: none;
 }

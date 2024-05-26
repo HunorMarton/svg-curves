@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { merge, fromEvent } from 'rxjs';
-import { map, concatMap, takeUntil } from 'rxjs/operators';
-import { Coordinate } from '../utils/types';
-import { round } from '../utils/round';
-import './Drag.css';
+import * as React from "react";
+import { merge, fromEvent } from "rxjs";
+import { map, concatMap, takeUntil } from "rxjs/operators";
+import { type Coordinate } from "../utils/types";
+import { round } from "../utils/round";
+import "./Drag.css";
 
-interface IProps {
+interface DragProps {
   children: React.ReactNode;
   x: number;
   y: number;
@@ -14,25 +14,24 @@ interface IProps {
   desc?: string;
 }
 
-interface IState {
-  dragging: boolean;
-}
+export const Drag: React.FC<DragProps> = ({
+  children,
+  x,
+  y,
+  zoom,
+  changeCoord,
+  desc,
+}) => {
+  const [dragging, setDragging] = React.useState(false);
+  const size = 40;
+  const draggableRef = React.useRef<SVGGElement>(null);
 
-export class Drag extends React.Component<IProps, IState> {
-  public readonly state: IState = {
-    dragging: false,
-  };
-
-  public size = 40;
-
-  public draggable: SVGElement;
-
-  public componentDidMount() {
-    const mouseEventToCoordinate = (mouseEvent: React.MouseEvent) => ({
+  React.useEffect(() => {
+    const mouseEventToCoordinate = (mouseEvent: MouseEvent) => ({
       x: mouseEvent.clientX,
       y: mouseEvent.clientY,
     });
-    const touchEventToCoordinate = (touchEvent: React.TouchEvent) => {
+    const touchEventToCoordinate = (touchEvent: TouchEvent) => {
       touchEvent.preventDefault();
       return {
         x: touchEvent.touches[0].clientX,
@@ -40,36 +39,38 @@ export class Drag extends React.Component<IProps, IState> {
       };
     };
 
-    // Event handling using Reactive JS
-    const mouseDowns = fromEvent<React.MouseEvent>(this.draggable, 'mousedown').pipe(
+    const mouseDowns = fromEvent<MouseEvent>(
+      draggableRef.current!,
+      "mousedown"
+    ).pipe(map(mouseEventToCoordinate));
+    const mouseMoves = fromEvent<MouseEvent>(window, "mousemove").pipe(
       map(mouseEventToCoordinate)
     );
-    const mouseMoves = fromEvent<React.MouseEvent>(window, 'mousemove').pipe(
-      map(mouseEventToCoordinate)
-    );
-    const mouseUps = fromEvent<React.MouseEvent>(window, 'mouseup');
+    const mouseUps = fromEvent<MouseEvent>(window, "mouseup");
 
-    const touchStarts = fromEvent<React.TouchEvent>(this.draggable, 'touchstart').pipe(
-      map(touchEventToCoordinate)
-    );
-    const touchMoves = fromEvent<React.TouchEvent>(this.draggable, 'touchmove').pipe(
-      map(touchEventToCoordinate)
-    );
-    const touchEnds = fromEvent<React.TouchEvent>(window, 'touchend');
+    const touchStarts = fromEvent<TouchEvent>(
+      draggableRef.current!,
+      "touchstart"
+    ).pipe(map(touchEventToCoordinate));
+    const touchMoves = fromEvent<TouchEvent>(
+      draggableRef.current!,
+      "touchmove"
+    ).pipe(map(touchEventToCoordinate));
+    const touchEnds = fromEvent<TouchEvent>(window, "touchend");
 
     const dragStarts = merge(mouseDowns, touchStarts);
     const moves = merge(mouseMoves, touchMoves);
     const dragEnds = merge(mouseUps, touchEnds);
 
     const drags = dragStarts.pipe(
-      concatMap(dragStartEvent => {
-        const xDelta = this.props.x - dragStartEvent.x * this.props.zoom;
-        const yDelta = this.props.y - dragStartEvent.y * this.props.zoom;
+      concatMap((dragStartEvent) => {
+        const xDelta = x - dragStartEvent.x * zoom;
+        const yDelta = y - dragStartEvent.y * zoom;
         return moves.pipe(
           takeUntil(dragEnds),
-          map(dragEvent => {
-            const x = dragEvent.x * this.props.zoom + xDelta;
-            const y = dragEvent.y * this.props.zoom + yDelta;
+          map((dragEvent) => {
+            const x = dragEvent.x * zoom + xDelta;
+            const y = dragEvent.y * zoom + yDelta;
             return { x, y };
           })
         );
@@ -77,35 +78,29 @@ export class Drag extends React.Component<IProps, IState> {
     );
 
     dragStarts.forEach(() => {
-      this.setState({ dragging: true });
+      setDragging(true);
     });
 
-    drags.forEach(coordinate => {
-      this.props.changeCoord({ x: coordinate.x, y: coordinate.y });
+    drags.forEach((coordinate) => {
+      changeCoord({ x: coordinate.x, y: coordinate.y });
     });
 
     dragEnds.forEach(() => {
-      this.setState({ dragging: false });
+      setDragging(false);
     });
-  }
+  }, [changeCoord, x, y, zoom]);
 
-  public render() {
-    return (
-      <g
-        className={this.state.dragging ? 'dragging' : 'draggable'}
-        ref={(draggable: SVGGElement) => {
-          this.draggable = draggable;
-        }}
-        transform={`translate(${this.props.x},${this.props.y})`}
-      >
-        <circle x={-this.size / 2} y={-this.size / 2} r={this.size / 2} />
-        {this.props.children}
-        <text x={this.size / 2} y={-this.size / 2} textAnchor="left" stroke="none">
-          {this.props.desc
-            ? this.props.desc
-            : `${round(this.props.x)}, ${round(this.props.y)}`}
-        </text>
-      </g>
-    );
-  }
-}
+  return (
+    <g
+      className={dragging ? "dragging" : "draggable"}
+      ref={draggableRef}
+      transform={`translate(${x},${y})`}
+    >
+      <circle x={-size / 2} y={-size / 2} r={size / 2} />
+      {children}
+      <text x={size / 2} y={-size / 2} textAnchor="left" stroke="none">
+        {desc ? desc : `${round(x)}, ${round(y)}`}
+      </text>
+    </g>
+  );
+};

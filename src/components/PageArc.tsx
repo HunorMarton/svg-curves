@@ -1,16 +1,20 @@
-import * as React from 'react';
-import { Arc, Coordinate } from '../utils/types';
-import { round } from '../utils/round';
-import Canvas from '../connected/Canvas';
-import Code from '../connected/Code';
-import { DragMove } from './DragMove';
-import { DragDistance } from './DragDistance';
-import { DragRotation } from './DragRotation';
+import * as React from "react";
+import { type Arc, type Coordinate } from "../utils/types";
+import { round } from "../utils/round";
+import { Canvas } from "../connected/Canvas";
+import { Code } from "../connected/Code";
+import { DragMove } from "./DragMove";
+import { DragDistance } from "./DragDistance";
+import { DragRotation } from "./DragRotation";
 
-type IProps = Arc & {
-  setArcFlags: (
-    { largeArcFlag, sweepFlag }: { largeArcFlag: boolean; sweepFlag: boolean }
-  ) => void;
+type PageArcProps = Arc & {
+  setArcFlags: ({
+    largeArcFlag,
+    sweepFlag,
+  }: {
+    largeArcFlag: boolean;
+    sweepFlag: boolean;
+  }) => void;
   setArcRotation: (coord: Coordinate) => void;
   setArcRadiusX: (coord: Coordinate) => void;
   setArcRadiusY: (coord: Coordinate) => void;
@@ -19,7 +23,7 @@ type IProps = Arc & {
   setArcCenterPoint: (coord: Coordinate) => void;
 };
 
-export const PageArc: React.SFC<IProps> = ({
+export const PageArc: React.FC<PageArcProps> = ({
   x1,
   y1,
   x2,
@@ -73,8 +77,20 @@ export const PageArc: React.SFC<IProps> = ({
   return (
     <div>
       <Canvas>
-        <line className="presentationHelper" x1={cx} y1={cy} x2={rxDragX} y2={rxDragY} />
-        <line className="presentationHelper" x1={cx} y1={cy} x2={ryDragX} y2={ryDragY} />
+        <line
+          className="presentationHelper"
+          x1={cx}
+          y1={cy}
+          x2={rxDragX}
+          y2={rxDragY}
+        />
+        <line
+          className="presentationHelper"
+          x1={cx}
+          y1={cy}
+          x2={ryDragX}
+          y2={ryDragY}
+        />
         {arcAlternative(false, false)}
         {arcAlternative(false, true)}
         {arcAlternative(true, false)}

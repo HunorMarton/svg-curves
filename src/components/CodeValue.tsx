@@ -1,10 +1,10 @@
-import * as React from 'react';
+import * as React from "react";
 
-interface IProps {
+interface CodeValueProps {
   children: React.ReactNode;
 }
 
-export const Value: React.SFC<IProps> = ({ children }) => (
+export const Value: React.FC<CodeValueProps> = ({ children }) => (
   <span>
     {'"'}
     <span className="value">{children}</span>

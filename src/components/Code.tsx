@@ -1,16 +1,15 @@
-import * as React from 'react';
-import {Tag} from './CodeTag';
-import {Attribute} from './CodeAttribute';
-import {Value }from './CodeValue';
-import './Code.css';
+import * as React from "react";
+import { Tag } from "./CodeTag.tsx";
+import { Attribute } from "./CodeAttribute.tsx";
+import { Value } from "./CodeValue.tsx";
+import "./Code.css";
 
-interface IProps {
-    width: number;
-    children: React.ReactText[];
+interface CodeProps {
+  width: number;
+  children: React.ReactNode;
 }
 
-
-export const Code: React.SFC<IProps> = ({ width, children }) => (
+export const Code: React.FC<CodeProps> = ({ width, children }) => (
   <div className="code" style={{ width }}>
     <pre>
       <Tag type="opening">svg</Tag>
@@ -27,7 +26,7 @@ export const Code: React.SFC<IProps> = ({ width, children }) => (
     <pre className="level2">
       <Attribute>d</Attribute>
       <Value>{children}</Value>
-      {'\n'}
+      {"\n"}
       <Attribute>stroke</Attribute>
       <Value>white</Value>
       <Attribute>stroke-width</Attribute>

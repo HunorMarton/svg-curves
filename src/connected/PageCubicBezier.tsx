@@ -1,15 +1,35 @@
-import { bindActionCreators, Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import { State, Action } from '../state/reducers';
-import { PageCubicBezier } from '../components/PageCubicBezier';
-import * as actions from '../state/ducks/cubicBezier/actions';
+import { useAppContext } from "../state/context.tsx";
+import { PageCubicBezier as UnconnectedPageCubicBezier } from "../components/PageCubicBezier.tsx";
+import { type Coordinate } from "../utils/types.ts";
+import {
+  CUBIC_BEZIER_START_POINT,
+  CUBIC_BEZIER_CONTROL_POINT_1,
+  CUBIC_BEZIER_CONTROL_POINT_2,
+  CUBIC_BEZIER_END_POINT,
+} from "../constants/actions.ts";
 
-const mapStateToProps = (state: State) => state.cubicBezier;
+export const PageCubicBezier: React.FC = () => {
+  const { state, dispatch } = useAppContext();
 
-const mapDispatchToProps = (dispatch: Dispatch<Action>) =>
-  bindActionCreators(actions, dispatch);
+  const setCubicBezierStartPoint = (coord: Coordinate) =>
+    dispatch({ type: CUBIC_BEZIER_START_POINT, payload: coord });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PageCubicBezier);
+  const setCubicBezierControlPoint1 = (coord: Coordinate) =>
+    dispatch({ type: CUBIC_BEZIER_CONTROL_POINT_1, payload: coord });
+
+  const setCubicBezierControlPoint2 = (coord: Coordinate) =>
+    dispatch({ type: CUBIC_BEZIER_CONTROL_POINT_2, payload: coord });
+
+  const setCubicBezierEndPoint = (coord: Coordinate) =>
+    dispatch({ type: CUBIC_BEZIER_END_POINT, payload: coord });
+
+  return (
+    <UnconnectedPageCubicBezier
+      {...state.cubicBezier}
+      setCubicBezierStartPoint={setCubicBezierStartPoint}
+      setCubicBezierControlPoint1={setCubicBezierControlPoint1}
+      setCubicBezierControlPoint2={setCubicBezierControlPoint2}
+      setCubicBezierEndPoint={setCubicBezierEndPoint}
+    />
+  );
+};

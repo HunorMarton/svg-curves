@@ -1,20 +1,23 @@
-import { bindActionCreators, Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import { State, Action } from '../state/reducers';
-import { Canvas } from '../components/Canvas';
-import * as actions from '../state/ducks/canvas/actions';
+import React, { type ReactNode } from "react";
+import { Canvas as UnconnectedCanvas } from "../components/Canvas.tsx";
+import { useAppContext } from "../state/context.tsx";
+import { RESIZE } from "../constants/actions.ts";
 
-const mapStateToProps = (state: State) => ({
-  svgWidth: state.canvas.svgWidth,
-  svgHeight: state.canvas.svgHeight,
-  viewBoxWidth: state.canvas.viewBoxWidth,
-  viewBoxHeight: state.canvas.viewBoxHeight,
-});
+export const Canvas: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const { state, dispatch } = useAppContext();
 
-const mapDispatchToProps = (dispatch: Dispatch<Action>) =>
-  bindActionCreators(actions, dispatch);
+  const resize = ({ width, height }: { width: number; height: number }) =>
+    dispatch({ type: RESIZE, payload: { width, height } });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Canvas);
+  return (
+    <UnconnectedCanvas
+      svgWidth={state.canvas.svgWidth}
+      svgHeight={state.canvas.svgHeight}
+      viewBoxWidth={state.canvas.viewBoxWidth}
+      viewBoxHeight={state.canvas.viewBoxHeight}
+      resize={resize}
+    >
+      {children}
+    </UnconnectedCanvas>
+  );
+};

@@ -1,9 +1,11 @@
-import { connect } from 'react-redux';
-import { State } from '../state/reducers';
-import { Code } from '../components/Code';
+import { type ReactNode } from "react";
+import { useAppContext } from "../state/context.tsx";
+import { Code as UnconnectedCode } from "../components/Code.tsx";
 
-const mapStateToProps = (state: State) => ({
-  width: state.canvas.svgWidth,
-});
+export const Code: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const { state } = useAppContext();
 
-export default connect(mapStateToProps)(Code);
+  return (
+    <UnconnectedCode width={state.canvas.svgWidth}>{children}</UnconnectedCode>
+  );
+};

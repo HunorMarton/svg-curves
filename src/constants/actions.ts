@@ -13,7 +13,7 @@ export const CUBIC_BEZIER_END_POINT = 'app/cubic/CUBIC_BEZIER_END_POINT';
 
 export const QUADRATIC_BEZIER_START_POINT = 'app/quadratic/QUADRATIC_BEZIER_START_POINT';
 export const QUADRATIC_BEZIER_CONTROL_POINT =
-  'app/quadratic/QUADRATIC_BEZIER_CONTROL_POINT';
+    'app/quadratic/QUADRATIC_BEZIER_CONTROL_POINT';
 export const QUADRATIC_BEZIER_END_POINT = 'app/quadratic/QUADRATIC_BEZIER_END_POINT';
 
 export const RESIZE = 'app/canvas/RESIZE';

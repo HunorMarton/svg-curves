@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { CROSS_SIZE, ARROW_HEAD } from '../constants/dragSize';
-import { Coordinate } from '../utils/types';
-import { round } from '../utils/round';
-import Drag from '../connected/Drag';
-import { ArrowHead } from './ArrowHead';
+import * as React from "react";
+import { CROSS_SIZE, ARROW_HEAD } from "../constants/dragSize";
+import { type Coordinate } from "../utils/types";
+import { round } from "../utils/round";
+import { Drag } from "../connected/Drag";
+import { ArrowHead } from "./ArrowHead";
 
-interface IProps {
+interface DragDistanceProps {
   x: number;
   y: number;
   degree: number;
@@ -13,7 +13,7 @@ interface IProps {
   changeCoord: (coord: Coordinate) => void;
 }
 
-export const DragDistance: React.SFC<IProps> = ({
+export const DragDistance: React.FC<DragDistanceProps> = ({
   x,
   y,
   degree,

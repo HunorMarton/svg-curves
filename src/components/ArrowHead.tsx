@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { ARROW_HEAD } from '../constants/dragSize';
+import React from "react";
+import { ARROW_HEAD } from "../constants/dragSize";
 
-interface IProps {
+interface ArrowHeadProps {
   x: number;
   y: number;
   rotation: number;
 }
 
-export const ArrowHead: React.SFC<IProps> = ({ x, y, rotation }) => (
+export const ArrowHead: React.FC<ArrowHeadProps> = ({ x, y, rotation }) => (
   <g transform={`translate(${x}, ${y})`}>
     <polygon
       className="arrowHead"

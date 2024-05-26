@@ -1,15 +1,30 @@
-import { bindActionCreators, Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import { State, Action } from '../state/reducers';
-import { PageQuadraticBezier } from '../components/PageQuadraticBezier';
-import * as actions from '../state/ducks/quadraticBezier/actions';
+import { useAppContext } from "../state/context.tsx";
+import { PageQuadraticBezier as UnconnectedPageQuadraticBezier } from "../components/PageQuadraticBezier.tsx";
+import { type Coordinate } from "../utils/types.ts";
+import {
+  QUADRATIC_BEZIER_START_POINT,
+  QUADRATIC_BEZIER_CONTROL_POINT,
+  QUADRATIC_BEZIER_END_POINT,
+} from "../constants/actions.ts";
 
-const mapStateToProps = (state: State) => state.quadraticBezier;
+export const PageQuadraticBezier: React.FC = () => {
+  const { state, dispatch } = useAppContext();
 
-const mapDispatchToProps = (dispatch: Dispatch<Action>) =>
-  bindActionCreators(actions, dispatch);
+  const setQuadraticBezierStartPoint = (coord: Coordinate) =>
+    dispatch({ type: QUADRATIC_BEZIER_START_POINT, payload: coord });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PageQuadraticBezier);
+  const setQuadraticBezierControlPoint1 = (coord: Coordinate) =>
+    dispatch({ type: QUADRATIC_BEZIER_CONTROL_POINT, payload: coord });
+
+  const setQuadraticBezierEndPoint = (coord: Coordinate) =>
+    dispatch({ type: QUADRATIC_BEZIER_END_POINT, payload: coord });
+
+  return (
+    <UnconnectedPageQuadraticBezier
+      {...state.quadraticBezier}
+      setQuadraticBezierStartPoint={setQuadraticBezierStartPoint}
+      setQuadraticBezierControlPoint1={setQuadraticBezierControlPoint1}
+      setQuadraticBezierEndPoint={setQuadraticBezierEndPoint}
+    />
+  );
+};

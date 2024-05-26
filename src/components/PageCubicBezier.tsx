@@ -1,18 +1,18 @@
-import * as React from 'react';
-import { CubicBezier, Coordinate } from '../utils/types';
-import { round } from '../utils/round';
-import Canvas from '../connected/Canvas';
-import Code from '../connected/Code';
-import { DragMove } from './DragMove';
+import * as React from "react";
+import { type CubicBezier, type Coordinate } from "../utils/types";
+import { round } from "../utils/round";
+import { Canvas } from "../connected/Canvas";
+import { Code } from "../connected/Code";
+import { DragMove } from "./DragMove";
 
-type IProps = CubicBezier & {
+type PageCubicBezierProps = CubicBezier & {
   setCubicBezierStartPoint: (coord: Coordinate) => void;
   setCubicBezierControlPoint1: (coord: Coordinate) => void;
   setCubicBezierControlPoint2: (coord: Coordinate) => void;
   setCubicBezierEndPoint: (coord: Coordinate) => void;
 };
 
-export const PageCubicBezier: React.SFC<IProps> = ({
+export const PageCubicBezier: React.FC<PageCubicBezierProps> = ({
   x0,
   y0,
   x1,
@@ -44,8 +44,8 @@ export const PageCubicBezier: React.SFC<IProps> = ({
       <DragMove x={x} y={y} changeCoord={setCubicBezierEndPoint} />
     </Canvas>
     <Code>
-      M {round(x0)} {round(y0)} C {round(x1)} {round(y1)}, {round(x2)} {round(y2)},{' '}
-      {round(x)} {round(y)}
+      M {round(x0)} {round(y0)} C {round(x1)} {round(y1)}, {round(x2)}{" "}
+      {round(y2)}, {round(x)} {round(y)}
     </Code>
   </div>
 );

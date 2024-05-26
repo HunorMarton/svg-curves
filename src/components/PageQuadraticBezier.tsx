@@ -1,17 +1,17 @@
-import * as React from 'react';
-import { QuadraticBezier, Coordinate } from '../utils/types';
-import { round } from '../utils/round';
-import Canvas from '../connected/Canvas';
-import Code from '../connected/Code';
-import { DragMove } from './DragMove';
+import * as React from "react";
+import { type QuadraticBezier, type Coordinate } from "../utils/types";
+import { round } from "../utils/round";
+import { Canvas } from "../connected/Canvas";
+import { Code } from "../connected/Code";
+import { DragMove } from "./DragMove";
 
-type IProps = QuadraticBezier & {
+type PageQuadraticBezierProps = QuadraticBezier & {
   setQuadraticBezierStartPoint: (coord: Coordinate) => void;
   setQuadraticBezierControlPoint1: (coord: Coordinate) => void;
   setQuadraticBezierEndPoint: (coord: Coordinate) => void;
 };
 
-export const PageQuadraticBezier: React.SFC<IProps> = ({
+export const PageQuadraticBezier: React.FC<PageQuadraticBezierProps> = ({
   x0,
   y0,
   x1,

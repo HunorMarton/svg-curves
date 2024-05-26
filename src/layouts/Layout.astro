@@ -1,0 +1,38 @@
+---
+import { ViewTransitions } from "astro:transitions";
+import Header from "./Header.astro";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="SVG Curves" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>SVG Curves</title>
+    <ViewTransitions />
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <Header />
+    <slot />
+  </body><style>
+    @import url("https://fonts.googleapis.com/css?family=Roboto");
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+    }
+
+    html {
+      background-color: white;
+      font-family: "Roboto", sans-serif;
+      font-size: 0.8em;
+      color: #ff0050;
+      overflow: hidden;
+    }
+  </style>
+</html>

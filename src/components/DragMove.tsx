@@ -1,16 +1,16 @@
-import * as React from 'react';
-import { CROSS_SIZE, ARROW_HEAD } from '../constants/dragSize';
-import { Coordinate } from '../utils/types';
-import Drag from '../connected/Drag';
-import { ArrowHead } from './ArrowHead';
+import * as React from "react";
+import { CROSS_SIZE, ARROW_HEAD } from "../constants/dragSize";
+import { type Coordinate } from "../utils/types";
+import { Drag } from "../connected/Drag";
+import { ArrowHead } from "./ArrowHead";
 
-interface IProps {
+interface DragMoveProps {
   x: number;
   y: number;
   changeCoord: (coord: Coordinate) => void;
 }
 
-export const DragMove: React.SFC<IProps> = ({ x, y, changeCoord }) => {
+export const DragMove: React.FC<DragMoveProps> = ({ x, y, changeCoord }) => {
   const innerCrossSize = CROSS_SIZE - ARROW_HEAD;
 
   return (
