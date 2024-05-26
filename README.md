@@ -1,4 +1,4 @@
-Interactive arc, cubic bezier and quadratic bezier curves with SVG source code, implemented using React, Redux and RxJS.
+Interactive arc, cubic bezier and quadratic bezier curves with SVG source code, implemented using React, RxJS and Astro.
 
 [https://hunormarton.github.io/svg-curves/](https://hunormarton.github.io/svg-curves/)
 
